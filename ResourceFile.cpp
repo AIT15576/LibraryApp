@@ -15,11 +15,11 @@ void Book::setBookDetails(string book_title, string book_author, string book_ISB
 
 // Class Method to display the book's details
 void Book::displayBookDetails() {
-	cout << left << setw(20) << title
+	cout << left << setw(25) << title
 		         << setw(20) << author
 		         << setw(15) << ISBN
 		         << setw(15) << (availability ? "Available" : "Borrowed")
-		         << setw(15) << dateAdd << endl;
+		         << setw(15) << dateAdd;
 }
 
 // Class Method to get for ISBN
@@ -47,43 +47,63 @@ void Book::returnBook() {
 }
 
 // Class Method to sort books by ISBN (simple bubble sort)
-void Book::sortBookData(Book books[], int n) {
+void Book::sortBookData(Book* books[], int n) {
 	for (int i = 0; i < n - 1; i++) {
 		for (int j = 0; j < n - i - 1; j++) {
-			if (books[j].ISBN > books[j + 1].ISBN) {
+			if (books[j]->ISBN > books[j + 1]->ISBN) {
 				swap(books[j], books[j + 1]);
 			}
 		}
 	}
 }
 
+void HardcopyBook::setShelfNumber(string shelf) {
+    shelfNumber = shelf;
+}
+
+void HardcopyBook::displayBookDetails() {
+    Book::displayBookDetails();
+    cout << setw(15) << ("Shelf: " + shelfNumber) << endl;
+}
+
+void EBook::setLicenseEnd(string date) {
+    licenseEndDate = date;
+}
+
+void EBook::displayBookDetails() {
+    Book::displayBookDetails();
+    cout << setw(1) << ("License: " + licenseEndDate) << endl;
+}
+
 // Function to list all books
-void displayBooks(int numBooks, Book listBooks[]) {
+void displayBooks(int numBooks, Book* listBooks[]) {
 	cout << string(30, ' ');
 	cout << "Current Book Collection:" << endl << endl;
-	cout << string(85, '-') << endl;
-	cout << left << setw(20) << "Title"
+	cout << string(110, '-') << endl;
+	cout << left 
+		<< setw(25) << "Title"
 		<< setw(20) << "Author"
 		<< setw(15) << "ISBN"
 		<< setw(15) << "Status"
-		<< setw(15) << "Date Added" << endl;
-	cout << string(85, '-') << endl;
+		<< setw(15) << "Date Added"
+		<< "Extra Info\n";
+	cout << string(110, '-') << endl;
 
 	for (int i = 0; i < numBooks; i++) {
-		listBooks[i].displayBookDetails();
+		listBooks[i]->displayBookDetails();
 	}
-	cout << string(85, '*') << endl;
+	cout << string(110, '*') << endl;
 }
 
 // Function to display Welcome
 void displayWelcome() {
-	cout << string(85, '*') << endl;
-	cout << string(85, '*') << endl;
+	cout << string(110, '*') << endl;
+	cout << string(110, '*') << endl;
 	cout << string(10, '*') << string(13, ' ');
 	cout << "Welcome to the Community Library System";
-	cout << string(10, ' ') << string(13, '*') << endl;
-	cout << string(85, '*') << endl;
-	cout << string(85, '*') << endl << endl;
+	cout << string(10, ' ') << string(38, '*') << endl;
+	cout << string(110, '*') << endl;
+	cout << string(110, '*') << endl << endl;
 }
 
 // Function to display Menu
@@ -107,10 +127,10 @@ void displayMenu() {
 // Function to display Goodbye
 void displayGoodbye() {
 	cout << endl;
-	cout << string(85, '*') << endl;
+	cout << string(110, '*') << endl;
 	cout << string(15, ' ');
 	cout << "Thank you for using the local community Library System.\n";
 	cout << string(40, ' ');
 	cout << "Goodbye!\n";
-	cout << string(85, '*') << endl;
+	cout << string(110, '*') << endl;
 }
