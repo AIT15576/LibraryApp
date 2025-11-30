@@ -1,6 +1,3 @@
-//command to compile:g++ main.cpp ResourceFile.cpp -o main
-//command to compile:g++ main.cpp ResourceFile.cpp -o main -std=c++11 //standar C++11 (the minimum requirement for override)
-//command to execute:.\main.exe
 #include "HeaderFile.h"
 #include <iostream>
 using namespace std;
